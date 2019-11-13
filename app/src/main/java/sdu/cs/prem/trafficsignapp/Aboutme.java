@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Aboutme extends AppCompatActivity {
 
     //Explicit
-    TextView fbTextView,telTextView ;
+    TextView fbTextView,telTextView,eduTextView ;
+    Button backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,26 @@ public class Aboutme extends AppCompatActivity {
             public void onClick(View view) {
                 Intent telIntent = new Intent(Intent.ACTION_DIAL);
                 telIntent.setData(Uri.parse("tel:0874149293"));
-                startActivity();
+                startActivity(telIntent);
+            }
+        });
+
+        eduTextView = findViewById(R.id.tv_edm);
+        final Uri localtion = Uri.parse("http://map.gogle.com/map?z=10&q=loc:13.776758,100.511322('มหาลัยสวนดุสิต')");
+        eduTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW,localtion);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
+
+        backButton = findViewById(R.id.bt_back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
